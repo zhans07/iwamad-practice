@@ -1,3 +1,12 @@
+
+import { useState } from "react";
+import SkillBadge from "./SkillBadge";
+
+type Skill = {
+  id: number;
+  label: string;
+};
+
 type ProfileCardProps = {
   name: string;
   role: string;
@@ -5,6 +14,17 @@ type ProfileCardProps = {
 };
 
 function ProfileCard({ name, role, avatarUrl }: ProfileCardProps) {
+  const [likes, setLikes] = useState(0);
+
+
+  const skills: Skill[] = [
+  { id: 1, label: "HTML" },
+  { id: 2, label: "Programming basics" },
+  { id: 3, label: "Communication" },
+  { id: 4, label: "Teamwork" },
+];
+    
+
   return (
     <main>
       <section id="about">
@@ -29,12 +49,15 @@ function ProfileCard({ name, role, avatarUrl }: ProfileCardProps) {
       <section id="skills">
         <h2>Skills</h2>
 
-        <ul>
-          <li>HTML</li>
-          <li>Programming basics</li>
-          <li>Communication</li>
-          <li>Teamwork</li>
-        </ul>
+        {skills.length === 0 ? (
+  <p>No skills available.</p>
+) : (
+  <ul>
+    {skills.map((skill) => (
+      <SkillBadge key={skill.id} skill={skill} />
+    ))}
+  </ul>
+)}
       </section>
 
       <section id="goals">
@@ -99,6 +122,10 @@ function ProfileCard({ name, role, avatarUrl }: ProfileCardProps) {
           <button type="submit">Send</button>
         </form>
       </section>
+
+      <button onClick={() => setLikes(likes + 1)}>
+        ❤️ Like {likes}
+      </button>
     </main>
   );
 }
