@@ -29,6 +29,7 @@ function ProfileCard({ name, role, avatarUrl }: ProfileCardProps) {
     <main>
       <section id="about">
         <h2>About Me</h2>
+        <p>{role}</p>
 
         {avatarUrl && (
           <img
