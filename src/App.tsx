@@ -15,7 +15,7 @@ function App() {
       <ProfileCard
         name="Zhansaya"
         role="Aspiring Web Developer"
-        avatarUrl="/profile.jpg"
+        avatarUrl={`${import.meta.env.BASE_URL}profile.jpg`}
       />
 
       <Footer text="© 2026 Zhansaya" />
