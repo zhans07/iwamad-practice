@@ -1,25 +1,21 @@
-import "./App.css";
+import { Routes, Route } from "react-router";
 
-import Header from "./components/Header";
-import ProfileCard from "./components/ProfileCard";
-import Footer from "./components/Footer";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import Skills from "./pages/Skills";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <>
-      <Header
-        name="Zhansaya"
-        role="Aspiring Web Developer"
-      />
-
-      <ProfileCard
-        name="Zhansaya"
-        role="Aspiring Web Developer"
-        avatarUrl="/iwamad-practice/profile.jpg"
-      />
-
-      <Footer text="© 2026 Zhansaya" />
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="skills" element={<Skills />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 
