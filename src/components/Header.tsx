@@ -1,5 +1,7 @@
+
 import { NavLink } from "react-router";
 import { useLikes } from "../context/LikesContext";
+import logo from "../assets/logo.svg";
 
 type HeaderProps = {
   name: string;
@@ -10,11 +12,16 @@ function Header({ name, role }: HeaderProps) {
   const { likes } = useLikes();
 
   return (
-    <header>
-      <h1>{name}</h1>
-      <p>{role}</p>
+    <header className="site-header">
+      <div className="site-header__brand">
+        <img src={logo} alt="" className="site-header__logo" />
+        <div>
+          <h1>{name}</h1>
+          <p>{role}</p>
+        </div>
+      </div>
 
-      <nav>
+      <nav className="site-header__nav" aria-label="Main navigation">
         <NavLink
           to="/"
           end
@@ -38,7 +45,7 @@ function Header({ name, role }: HeaderProps) {
         </NavLink>
       </nav>
 
-      <p>Likes: {likes}</p>
+      <p className="site-header__likes">Likes: {likes}</p>
     </header>
   );
 }
