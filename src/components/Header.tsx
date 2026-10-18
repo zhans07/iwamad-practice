@@ -43,6 +43,13 @@ function Header({ name, role }: HeaderProps) {
         >
           Contact
         </NavLink>
+
+        <NavLink
+          to="/register"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Register
+        </NavLink>
       </nav>
 
       <p className="site-header__likes">Likes: {likes}</p>

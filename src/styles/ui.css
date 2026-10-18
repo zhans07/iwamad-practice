@@ -58,3 +58,100 @@
   background: var(--color-surface);
   font-size: 14px;
 }
+
+/* Week 6 registration form */
+.register-page {
+  width: min(100% - 32px, 480px);
+  margin: 32px auto;
+}
+
+.register-page h1 {
+  margin-bottom: 8px;
+}
+
+.register-page > p {
+  margin-bottom: 24px;
+}
+
+.register-page form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field input:not([type="checkbox"]) {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font: inherit;
+}
+
+.field input[aria-invalid="true"] {
+  border: 2px solid var(--color-error);
+}
+
+.field-error {
+  margin: 0;
+  color: var(--color-error);
+  font-size: 0.875rem;
+}
+
+.register-page .field label {
+  font-weight: 500;
+}
+
+.register-page .check label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+}
+
+.register-page button[type="submit"] {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.register-page button[type="submit"]:focus-visible,
+.register-page input:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.register-page .field input:not([type="checkbox"]) {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font: inherit;
+}
+
+.register-page .field {
+  display: grid;
+  gap: 8px;
+}
+
+.register-page .field-error {
+  margin: 0;
+}
