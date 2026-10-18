@@ -1,4 +1,6 @@
+
 import LikeButton from "./LikeButton";
+import Card from "./ui/Card";
 
 type ProfileCardProps = {
   name: string;
@@ -9,7 +11,7 @@ type ProfileCardProps = {
 function ProfileCard({ name, role, avatarUrl }: ProfileCardProps) {
   return (
     <main>
-      <section id="about">
+      <Card id="about">
         <h2>About Me</h2>
         <p>{role}</p>
 
@@ -29,9 +31,10 @@ function ProfileCard({ name, role, avatarUrl }: ProfileCardProps) {
         </p>
 
         <LikeButton />
-      </section>
+      </Card>
     </main>
   );
 }
 
 export default ProfileCard;
+
