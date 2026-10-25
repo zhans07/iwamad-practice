@@ -45,6 +45,13 @@ function Header({ name, role }: HeaderProps) {
         </NavLink>
 
         <NavLink
+          to="/events"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          Events
+        </NavLink>
+
+        <NavLink
           to="/register"
           className={({ isActive }) => (isActive ? "active" : "")}
         >

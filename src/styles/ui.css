@@ -155,3 +155,19 @@
 .register-page .field-error {
   margin: 0;
 }
+
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+.card-grid h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.card-grid .card {
+  max-width: none;
+}
