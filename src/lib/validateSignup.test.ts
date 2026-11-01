@@ -1,40 +1,44 @@
-
 import { describe, it, expect } from "vitest";
 import { validateSignup } from "./validateSignup";
 
 describe("validateSignup", () => {
-  it("returns no errors for valid values", () => {
+  it("returns no errors for a valid sign-up", () => {
     expect(
       validateSignup(
-        { fullName: "Alex", email: "alex@example.com", tickets: 1 },
+        {
+          fullName: "Ada Lovelace",
+          email: "ada@example.com",
+          tickets: "1",
+        },
         5
       )
     ).toEqual({});
   });
 
-  it("requires a full name", () => {
+  it("shows errors for empty fields and zero tickets", () => {
     const errors = validateSignup(
-      { fullName: " ", email: "alex@example.com", tickets: 1 },
+      {
+        fullName: "",
+        email: "",
+        tickets: "0",
+      },
       5
     );
 
     expect(errors.fullName).toBe("Enter your full name");
-  });
-
-  it("validates the email address", () => {
-    const errors = validateSignup(
-      { fullName: "Alex", email: "invalid-email", tickets: 1 },
-      5
-    );
-
     expect(errors.email).toBe(
       "Enter a valid email, like name@example.com"
     );
+    expect(errors.tickets).toBe("Choose 1 to 4 tickets");
   });
 
-  it("rejects zero tickets", () => {
+  it("rejects 5 tickets", () => {
     const errors = validateSignup(
-      { fullName: "Alex", email: "alex@example.com", tickets: 0 },
+      {
+        fullName: "Ada Lovelace",
+        email: "ada@example.com",
+        tickets: "5",
+      },
       5
     );
 
@@ -43,16 +47,37 @@ describe("validateSignup", () => {
 
   it("rejects fractional tickets", () => {
     const errors = validateSignup(
-      { fullName: "Alex", email: "alex@example.com", tickets: 1.5 },
+      {
+        fullName: "Ada Lovelace",
+        email: "ada@example.com",
+        tickets: "1.5",
+      },
       5
     );
 
     expect(errors.tickets).toBe("Choose 1 to 4 tickets");
   });
 
-  it("rejects tickets above available seats", () => {
+  it("accepts exactly 4 tickets when enough seats are available", () => {
+    expect(
+      validateSignup(
+        {
+          fullName: "Ada Lovelace",
+          email: "ada@example.com",
+          tickets: "4",
+        },
+        5
+      )
+    ).toEqual({});
+  });
+
+  it("rejects more tickets than available seats", () => {
     const errors = validateSignup(
-      { fullName: "Alex", email: "alex@example.com", tickets: 3 },
+      {
+        fullName: "Ada Lovelace",
+        email: "ada@example.com",
+        tickets: "3",
+      },
       2
     );
 

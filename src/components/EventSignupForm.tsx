@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import type { FormEvent } from "react";
+import type { FormEvent, ChangeEvent } from "react";
 import TextField from "./ui/TextField";
 import Button from "./ui/Button";
 import type { CampusEvent } from "../data/events";
@@ -22,11 +22,20 @@ export default function EventSignupForm({
   const [values, setValues] = useState<SignupValues>({
     fullName: "",
     email: "",
-    tickets: 1,
+    tickets: "1",
   });
 
   const [submitted, setSubmitted] = useState(false);
   const errors = validateSignup(values, seatsLeft);
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+
+    setValues((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,12 +43,12 @@ export default function EventSignupForm({
 
     if (Object.keys(errors).length > 0) return;
 
-    onSignup(values.tickets, values.fullName.trim());
+    onSignup(Number(values.tickets), values.fullName.trim());
 
     setValues({
       fullName: "",
       email: "",
-      tickets: 1,
+      tickets: "1",
     });
     setSubmitted(false);
   }
@@ -50,12 +59,7 @@ export default function EventSignupForm({
         label="Full Name"
         name="fullName"
         value={values.fullName}
-        onChange={(e) =>
-          setValues((current) => ({
-            ...current,
-            fullName: e.target.value,
-          }))
-        }
+        onChange={handleChange}
         error={submitted ? errors.fullName : undefined}
       />
 
@@ -64,12 +68,7 @@ export default function EventSignupForm({
         name="email"
         type="email"
         value={values.email}
-        onChange={(e) =>
-          setValues((current) => ({
-            ...current,
-            email: e.target.value,
-          }))
-        }
+        onChange={handleChange}
         error={submitted ? errors.email : undefined}
       />
 
@@ -80,12 +79,7 @@ export default function EventSignupForm({
         min={1}
         max={4}
         value={values.tickets}
-        onChange={(e) =>
-          setValues((current) => ({
-            ...current,
-            tickets: Number(e.target.value),
-          }))
-        }
+        onChange={handleChange}
         error={submitted ? errors.tickets : undefined}
       />
 

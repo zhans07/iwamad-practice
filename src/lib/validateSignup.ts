@@ -1,8 +1,7 @@
-
 export type SignupValues = {
   fullName: string;
   email: string;
-  tickets: number;
+  tickets: string;
 };
 
 export type SignupErrors = Partial<
@@ -23,13 +22,16 @@ export function validateSignup(
     errors.email = "Enter a valid email, like name@example.com";
   }
 
+  const tickets = Number(values.tickets);
+
   if (
-    !Number.isInteger(values.tickets) ||
-    values.tickets < 1 ||
-    values.tickets > 4
+    values.tickets.trim() === "" ||
+    !Number.isInteger(tickets) ||
+    tickets < 1 ||
+    tickets > 4
   ) {
     errors.tickets = "Choose 1 to 4 tickets";
-  } else if (values.tickets > seatsLeft) {
+  } else if (tickets > seatsLeft) {
     errors.tickets = `Only ${seatsLeft} seats left`;
   }
 
